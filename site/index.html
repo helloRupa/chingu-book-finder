@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Parisienne" rel="stylesheet"> 
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
@@ -22,7 +23,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <header>
-        <nav><a href="https://github.com/helloRupa/chingu-book-finder" target="_blank">Project on GitHub</a></nav>
+        <nav><a href="https://github.com/helloRupa/chingu-book-finder" target="_blank">GitHub</a></nav>
         <h1>Book Finder</h1>
         <form>
             <input id="search-bar" type="text" name="search-bar" maxlength="75" autofocus placeholder="Enter title, author, publisher...">
@@ -36,13 +37,18 @@
             <p>Searching Dewey Decimal's brains...</p>
         </div> -->
 
-        <section id="results" class="results"></section>
+        <section id="results" class="results">
+            <p>Nothing to see here. You haven't searched for anything.</p>
+        </section>
 
         <!-- <section id="bad_response" class="bad_response">
             <h2>Sorry, but something has gone wrong!</h2>
             <p>Problem goes here.</p>
         </section> -->
     </main>
+    <footer>
+        Created using the Google Books API and a whole lot of vanilla!
+    </footer>
     <script src="./scripts/main_methods.js"></script>
 </body>
 
