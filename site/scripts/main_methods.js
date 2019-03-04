@@ -64,7 +64,6 @@ const handleData = (function(data) {
         element.setAttribute('href', bookData.infoLink);
         element.setAttribute('target', '_blank');
         element.textContent = 'More info';
-        // return element;
     };
 
     return {
@@ -103,6 +102,25 @@ const failure = (function(error){
 
 });
 
+const display = (function() {
+    let clearCont = function(div_id) {
+        let div = document.getElementById(div_id);
+        while(div.firstChild){
+            div.removeChild(div.firstChild);
+        }
+    };
+
+    return {
+        clear: clearCont
+    };
+});
+
+const doSearch = (function(){
+    let searchTxt = searchBar('search-bar').format();
+    if (searchTxt == '') return;
+    display().clear('results');
+    fetchData(bookData, searchTxt);
+});
 
 const bookData = {
     url: 'https://www.googleapis.com/books/v1/volumes?q=',
@@ -115,14 +133,12 @@ const bookData = {
 
 document.getElementById('submit-search').onclick = function(e) {
     e.preventDefault();
-    let searchTxt = searchBar('search-bar').format();
-    fetchData(bookData, searchTxt);
+    doSearch();
 };
 
 document.getElementById('submit-search').onkeydown = function(e){
     if(e.keyCode == 13){
-        let searchTxt = searchBar('search-bar').format();
-        fetchData(bookData, searchTxt);
+        doSearch();
     }
  };
     
