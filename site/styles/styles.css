@@ -124,6 +124,7 @@ section.bad_response {
     white-space: nowrap;
     overflow: hidden;
     font-size: 0.9em;
+    color: #4e4753;
 }
 
 .book a {
@@ -178,7 +179,17 @@ footer {
 
     .book {
         display: inline-block;
+        position: relative;
         width: 320px;
+        height: 420px;
+        vertical-align: top;
         margin: 1em 30px;
+    }
+
+    .book a {
+        position: absolute;
+        bottom: 25px;
+        left: 50px;
+        right: 50px;
     }
 }
