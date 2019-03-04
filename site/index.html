@@ -12,7 +12,8 @@
     <title>Book Finder</title>
     <meta name="description" content="Search for books using the Google Books API. This is a project for Chingu.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
@@ -24,13 +25,24 @@
         <nav><a href="https://github.com/helloRupa/chingu-book-finder" target="_blank">Project on GitHub</a></nav>
         <h1>Book Finder</h1>
         <form>
-            <input id="search-bar" type="text" name="search-bar" autofocus>
+            <input id="search-bar" type="text" name="search-bar" maxlength="75" autofocus placeholder="Enter title, author, publisher...">
             <button id="submit-search" type="submit"><i class="fa fa-search"></i></button>
         </form>
     </header>
 
-    <section id="results"></section>
+    <main>
+        <!-- <div id="loading" class="loading">
+            <p>Checking the bookshelves.</p>
+            <p>Searching Dewey Decimal's brains...</p>
+        </div> -->
 
+        <section id="results" class="results"></section>
+
+        <!-- <section id="bad_response" class="bad_response">
+            <h2>Sorry, but something has gone wrong!</h2>
+            <p>Problem goes here.</p>
+        </section> -->
+    </main>
     <script src="./scripts/main_methods.js"></script>
 </body>
 

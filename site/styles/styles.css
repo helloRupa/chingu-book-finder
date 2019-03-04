@@ -38,7 +38,7 @@ input[type="text"] {
     width: 70%;
     box-sizing: border-box;
     padding-left: 10px;
-    font-size: 1.5em;
+    font-size: 1.3em;
     border: none;
     border-bottom: gray solid 1px;
 }
@@ -50,4 +50,31 @@ button[type="submit"] {
     border: none;
     background-color: blueviolet;
     color: white;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: darkmagenta;
+}
+
+main {
+    width: 93%;
+    margin: 2em auto;
+    text-align: center;
+}
+
+.loading {
+    display: block;
+}
+
+section.results {
+    display: block;
+}
+
+section.bad_response {
+    display: block;
+}
+
+.book {
+    
 }
