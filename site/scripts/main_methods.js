@@ -22,10 +22,12 @@ const fetchData = (function(options_obj, searchTxt){
 		if (!response.ok) throw Error (response.statusText);
 		return response.json();
 	}).then((data) => {
+        console.log(data);
         options_obj.success(data, options_obj);
-		console.log(data);
+        display().hide('loading');
 	}).catch(error => {
-        options_obj.failure(error);
+        options_obj.failure(error, options_obj);
+        display().hide('loading');
         console.log(error);
     });
 });
@@ -60,6 +62,13 @@ const handleData = (function(data) {
         return './images/image_placeholder.png';
     };
 
+    let imgCont = function(imgEl) {
+        let div = document.createElement('div');
+        div.classList.add('img-cont');
+        div.appendChild(imgEl);
+        return div;
+    };
+
     let fillLink = function(element) {
         element.setAttribute('href', bookData.infoLink);
         element.setAttribute('target', '_blank');
@@ -69,12 +78,18 @@ const handleData = (function(data) {
     return {
         generic: generic,
         img: img,
-        fillLink: fillLink
+        fillLink: fillLink,
+        imgCont: imgCont
     };
 });
 
 const success = (function(jData, options_obj){
     let bookDiv = document.getElementById(options_obj.successDiv);
+    if(!jData.hasOwnProperty('items')){
+        let child = options_obj.errorContent(options_obj.emptyMsg);
+        bookDiv.appendChild(child);
+        return;
+    }
 
     jData.items.forEach((book) => {
         let dataHandler = handleData(book.volumeInfo);
@@ -84,6 +99,7 @@ const success = (function(jData, options_obj){
         const {titleCont, authorCont, pubCont, imgCont, linkCont} = makeResultEls();
 
         imgCont.src = dataHandler.img();
+        imgDiv = dataHandler.imgCont(imgCont);
         titleCont.textContent = dataHandler.generic('title');
         pubCont.textContent = dataHandler.generic('publisher');
 
@@ -93,25 +109,41 @@ const success = (function(jData, options_obj){
         let infoLink = dataHandler.generic('infoLink');
         if(infoLink != 'N/A') dataHandler.fillLink(linkCont);
 
-        [imgCont, titleCont, authorCont, pubCont, linkCont].forEach((el) => div.appendChild(el));
+        [imgDiv, titleCont, authorCont, pubCont, linkCont].forEach((el) => div.appendChild(el));
         bookDiv.appendChild(div);
     });
 });
 
-const failure = (function(error){
-
+const failure = (function(error, options_obj){
+    let bookDiv = document.getElementById(options_obj.successDiv);
+    let child = options_obj.errorContent(`${options_obj.errorMsg} ${error}`);
+    bookDiv.appendChild(child);
 });
 
 const display = (function() {
-    let clearCont = function(div_id) {
-        let div = document.getElementById(div_id);
+    let clearCont = function(divId) {
+        let div = document.getElementById(divId);
         while(div.firstChild){
             div.removeChild(div.firstChild);
         }
     };
 
+    let show = function(divId) {
+        let div = document.getElementById(divId);
+        div.classList.remove('hide');
+        div.classList.add('show');
+    };
+
+    let hide = function(divId) {
+        let div = document.getElementById(divId);
+        div.classList.remove('show');
+        div.classList.add('hide');
+    };
+
     return {
-        clear: clearCont
+        clear: clearCont,
+        show: show,
+        hide: hide
     };
 });
 
@@ -119,7 +151,14 @@ const doSearch = (function(){
     let searchTxt = searchBar('search-bar').format();
     if (searchTxt == '') return;
     display().clear('results');
+    display().show('loading');
     fetchData(bookData, searchTxt);
+});
+
+const errorContent = (function(msg){
+    let message = document.createElement('p');
+    message.textContent = msg;
+    return message;
 });
 
 const bookData = {
@@ -128,6 +167,9 @@ const bookData = {
     success: success,
     successDiv: 'results',
     failure: failure,
+    errorContent: errorContent,
+    errorMsg: "We're sorry, but something has gone wrong.\r\n",
+    emptyMsg: "Your search didn't return any results. Please search for something else.",
     timeout: 1
 };
 
