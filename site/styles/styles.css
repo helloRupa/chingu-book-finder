@@ -1,3 +1,22 @@
+:root {
+    --main-color: #54577c;
+    --header-btn-link: #ffffff;
+    --header-btn-link-hover: #f2fbd6;
+}
+
+/* Animations */
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes move-dragon {
+    0%   {margin-left:-300px;}
+    100% {margin-left: 300px;}
+  }
+
+@keyframes move-dragon {
+    0%   {margin-left:-300px;}
+    100% {margin-left: 300px;}
+  }
+/* End Animations */
+
 body {
     background-color: #FFF;
     width: 100%;
@@ -7,10 +26,11 @@ body {
     margin: auto;
 }
 
+/* Header content, including nav and search form */
 header {
     padding: 1em;
     margin: 0 auto 1em auto;
-    background-color: #54577c;
+    background-color: var(--main-color);
 }
 
 h1 {
@@ -28,12 +48,12 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #ffffff;
+    color: var(--header-btn-link);
     font-size: 0.85em;
 }
 
 nav a:hover {
-    color: #f2fbd6;
+    color: var(--header-btn-link-hover);
 }
 
 form {
@@ -57,37 +77,44 @@ button[type="submit"] {
     height: 1.4em;
     font-size: 1.5em;
     border: none;
-    background-color: #fff;
-    color: #54577c;
+    background-color: var(--header-btn-link);
+    color: var(--main-color);
     cursor: pointer;
     vertical-align: top;
 }
 
 button[type="submit"]:hover {
-    background-color: #f2fbd6;
+    background-color: var(--header-btn-link-hover);
 }
 
+/* Main page including results, load screen, etc */
 main {
     width: 93%;
-    margin: 2em auto;
+    margin: 50px auto;
     text-align: center;
+    position: relative;
 }
 
-.results p {
-    color: #54577c;
+.results p, .loading p {
+    color: var(--main-color);
+    white-space: pre-line;
 }
 
 .loading {
-    display: block;
+    display: none;
+}
+
+.fa-dragon {
+    margin-top: 1em;
+    font-size: 3em;
+    color: #9d6db0;
+    -webkit-animation: move-dragon 3s linear 0s infinite;
+    animation: move-dragon 3s linear 0s infinite;
 }
 
 section.results {
     display: block;
     min-height: 480px;
-}
-
-section.bad_response {
-    display: block;
 }
 
 .book {
@@ -103,11 +130,20 @@ section.bad_response {
 
 .book h2 {
     font-size: 1.15em;
+    max-height: 2.85em;
+    overflow: hidden;
+}
+
+.img-cont {
+	height: 180px;
+	display: table-cell;
+	vertical-align: middle;
+    width: 300px;
+    padding-bottom: 20px;
 }
 
 .book img {
     max-height: 180px;
-    margin-bottom: 20px;
 }
 
 .book p:first-of-type::before {
@@ -144,11 +180,21 @@ section.bad_response {
 footer {
     text-align: center;
     font-size: 0.8em;
-    background-color: #54577c;
+    background-color: var(--main-color);
     padding: 5px 0;
     color: #fff;
 }
 
+/* Basic styles */
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+/* Style placeholder text for inputs */
 ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #fff;
