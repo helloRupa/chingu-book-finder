@@ -1,6 +1,6 @@
 # chingu-book-finder
 Book finder using Google Books API.
-Created w/ vaniall JS, CSS and HTML5.
+Created w/ vanilla JS, CSS and HTML5.
 
 ## Features
 - Responsive design
